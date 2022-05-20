@@ -64,7 +64,13 @@ jobs:
           labels: not-supported
           github_token: ${{ secrets.STORE }}    
           
-            
+      
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "new-json-file.json"
+          json: ${{ secrets.MY_JSON }}
           
 #      - uses: MerthinTechnologies/edit-json-action@v1
 #        if: ${{ env.FRAME == 'false' }}
