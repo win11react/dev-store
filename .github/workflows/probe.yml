@@ -69,7 +69,7 @@ jobs:
         id: create-json
         uses: jsdaniell/create-json@1.1.2
         with:
-          name: "new-json-file.json"
+          name: "template.json"
           json: ${{ secrets.MY_JSON }}
           
 #      - uses: MerthinTechnologies/edit-json-action@v1
@@ -100,29 +100,26 @@ jobs:
 #          key: 'data, Type'
 #          value: '${{ steps.issue-parser.outputs.issueparser_Type }}'    
 #          
-#      - name: merge
-#        if: ${{ env.FRAME == 'false' }}
-#        run: |
-#          export json=$(cat template.json)
-#          python json-merge.py
-#          rm name.json
-#          rm bug-details.json
-#          
-#      - name: cpr
-#        uses: peter-evans/create-pull-request@v3
-#        if: ${{ env.FRAME == 'false' }}
-#        with:
-#          token: ${{ secrets.BOT }}
-#          commit-message: Add ${{ steps.issue-parser.outputs.issueparser_Name }}
-#          title: Add ${{ steps.issue-parser.outputs.issueparser_Name }}
-#          body: Add ${{ steps.issue-parser.outputs.issueparser_Name }} with url ${{ steps.issue-parser.outputs.issueparser_URL }}. THIS SERVICE IS IN BETA CHANGES MUST BE CHECKED BEFORE MERGING. IMAGES MUST BE MANULLY ADDED.
-#      
-#      - uses: ben-z/actions-comment-on-issue@1.0.2
-#        if: ${{ env.FRAME == 'false' }}
-#        with:
-#          message: "A Pull request has been generated. You may view this here: ${{ steps.cpr.outputs.pull-request-url }} "
-#          GITHUB_TOKEN: ${{ secrets.BOT }}    
-#          
-#
-#
-#    
+      - name: merge
+        if: ${{ env.FRAME == 'false' }}
+        run: |
+          export json=$(cat template.json)
+          python json-merge.py
+          rm name.json
+          rm bug-details.json
+          
+      - name: cpr
+        uses: peter-evans/create-pull-request@v3
+        if: ${{ env.FRAME == 'false' }}
+        with:
+          token: ${{ secrets.BOT }}
+          commit-message: Add ${{ steps.issue-parser.outputs.issueparser_Name }}
+          title: Add ${{ steps.issue-parser.outputs.issueparser_Name }}
+          body: Add ${{ steps.issue-parser.outputs.issueparser_Name }} with url ${{ steps.issue-parser.outputs.issueparser_URL }}. THIS SERVICE IS IN BETA CHANGES MUST BE CHECKED BEFORE MERGING. IMAGES MUST BE MANULLY ADDED.
+      
+      - uses: ben-z/actions-comment-on-issue@1.0.2
+        if: ${{ env.FRAME == 'false' }}
+        with:
+          message: "A Pull request has been generated. You may view this here: ${{ steps.cpr.outputs.pull-request-url }} "
+          GITHUB_TOKEN: ${{ secrets.BOT }}    
+          
