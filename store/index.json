@@ -1,4 +1,4 @@
-{
+[{
 		"name": "LTunes",
 		"icon": "https://ltunes.gq/assets/Logo.png",
 		"type": "app",
@@ -789,4 +789,4 @@
     	"feat": "Inception",
     	"invert": true
   }
-}
+}]
